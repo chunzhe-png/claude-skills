@@ -1,11 +1,11 @@
 # Claude Code Skills
 
-[![GitHub release](https://img.shields.io/github/v/release/chunzhe-png/claude-skills)](https://github.com/chunzhe-png/claude-skills/releases)
+[![GitHub release](https://img.shields.io/github/v/release/pantas-green/pantas-claude-skills)](https://github.com/pantas-green/pantas-claude-skills/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Reusable Claude Code skills for Pantas Green projects. Skills auto-activate based on context - no manual loading required.
 
-**Repository**: https://github.com/chunzhe-png/claude-skills
+**Repository**: https://github.com/pantas-green/pantas-claude-skills
 
 ## What Are Skills?
 
@@ -31,7 +31,7 @@ Skills are auto-discoverable capabilities that extend Claude Code:
 
 ```bash
 # Add to your project/devcontainer
-git submodule add https://github.com/chunzhe-png/claude-skills.git skills
+git submodule add https://github.com/pantas-green/pantas-claude-skills.git skills
 
 # Pin to specific version
 cd skills
@@ -45,7 +45,7 @@ git commit -m "Add claude-skills submodule at v1.0.0"
 
 ```bash
 # Clone directly
-git clone https://github.com/chunzhe-png/claude-skills.git ~/.claude/skills
+git clone https://github.com/pantas-green/pantas-claude-skills.git ~/.claude/skills
 
 # Or symlink
 ln -sf /path/to/claude-skills ~/.claude/skills
@@ -169,7 +169,7 @@ Example tests:
 
 ## Integration with Devcontainer
 
-This repository is designed to be used as a git submodule in the [devcontainer](https://github.com/chunzhe-png/devcontainer) setup:
+This repository is designed to be used as a git submodule in the [devcontainer](https://github.com/pantas-green/pantas-devcontainer) setup:
 
 ```
 devcontainer/
@@ -217,7 +217,7 @@ git submodule update --init skills
 
 ## Related Repositories
 
-- **Devcontainer**: https://github.com/chunzhe-png/devcontainer - Shared devcontainer setup that uses these skills
+- **Devcontainer**: https://github.com/pantas-green/pantas-devcontainer - Shared devcontainer setup that uses these skills
 
 ## License
 
@@ -227,4 +227,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 *Version: 1.0.0*
 *Last Updated: 2025-12-16*
-*Repository: https://github.com/chunzhe-png/claude-skills*
+*Repository: https://github.com/pantas-green/pantas-claude-skills*
