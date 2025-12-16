@@ -1,14 +1,20 @@
 # Claude Code Skills
 
-This directory contains reusable Claude Code skills for Pantas Green projects.
+[![GitHub release](https://img.shields.io/github/v/release/chunzhe-png/claude-skills)](https://github.com/chunzhe-png/claude-skills/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Reusable Claude Code skills for Pantas Green projects. Skills auto-activate based on context - no manual loading required.
+
+**Repository**: https://github.com/chunzhe-png/claude-skills
 
 ## What Are Skills?
 
-Skills are auto-discoverable capabilities that extend Claude Code. Unlike manual context loading, skills:
+Skills are auto-discoverable capabilities that extend Claude Code:
 
 - **Auto-activate** based on your prompt (no manual invocation needed)
 - **Progressive disclosure** - details load only when needed
 - **Composable** - multiple skills can work together
+- **Version controlled** - semantic versioning with git tags
 
 ## Available Skills
 
@@ -18,6 +24,32 @@ Skills are auto-discoverable capabilities that extend Claude Code. Unlike manual
 | [github-workflow](github-workflow/) | Git conventions, PR templates, CI troubleshooting | commit, push, PR, branch, git, GRE- |
 | [implementation-planning](implementation-planning/) | Structured feature planning template | plan, implement, design, feature, spec |
 | [testing](testing/) | pytest-django and Vitest patterns | test, pytest, vitest, mock, fixture |
+
+## Quick Start
+
+### As Git Submodule (Recommended)
+
+```bash
+# Add to your project/devcontainer
+git submodule add https://github.com/chunzhe-png/claude-skills.git skills
+
+# Pin to specific version
+cd skills
+git checkout v1.0.0
+cd ..
+git add skills
+git commit -m "Add claude-skills submodule at v1.0.0"
+```
+
+### Manual Installation
+
+```bash
+# Clone directly
+git clone https://github.com/chunzhe-png/claude-skills.git ~/.claude/skills
+
+# Or symlink
+ln -sf /path/to/claude-skills ~/.claude/skills
+```
 
 ## How Skills Work
 
@@ -29,10 +61,10 @@ Skills are auto-discoverable capabilities that extend Claude Code. Unlike manual
 ## Directory Structure
 
 ```
-skills/
+claude-skills/
 ├── README.md                      # This file
 ├── CHANGELOG.md                   # Version history
-├── VERSION                        # Current version
+├── VERSION                        # Current version (1.0.0)
 │
 ├── django-development/
 │   ├── SKILL.md                   # Main skill definition
@@ -54,41 +86,26 @@ skills/
     └── frontend-patterns.md
 ```
 
-## Usage
-
-### In Devcontainer (Automatic)
-
-Skills are automatically set up when the devcontainer starts:
-1. `postCreateCommand` runs `setup-claude.sh`
-2. Skills directory is symlinked to `~/.claude/skills/`
-3. Claude Code discovers skills automatically
-
-### Manual Setup
-
-```bash
-# Symlink to Claude's skills directory
-ln -sf /path/to/devcontainer/skills ~/.claude/skills
-
-# Or copy
-cp -r /path/to/devcontainer/skills ~/.claude/
-```
-
 ## Version Management
 
-### Using Git Submodules
-
-If skills are managed as a git submodule:
+### Check Current Version
 
 ```bash
-# Check current version
-cd skills
+cat VERSION
+# or
 git describe --tags
+```
 
-# Update to new version
+### Update to New Version
+
+```bash
+# If using as submodule
+cd skills
 git fetch --tags
-git checkout v1.1.0
+git tag -l                    # List available versions
+git checkout v1.1.0           # Checkout new version
 
-# Commit the update (in parent repo)
+# Commit in parent repo
 cd ..
 git add skills
 git commit -m "chore: update claude-skills to v1.1.0"
@@ -96,7 +113,7 @@ git commit -m "chore: update claude-skills to v1.1.0"
 
 ### Versioning Convention
 
-We use semantic versioning:
+We use [Semantic Versioning](https://semver.org/):
 - **MAJOR**: Breaking changes (skill renamed, incompatible changes)
 - **MINOR**: New features (new skill added, new supporting files)
 - **PATCH**: Bug fixes (typos, clarifications)
@@ -133,6 +150,7 @@ We use semantic versioning:
    git add .
    git commit -m "feat: add new-skill-name skill"
    git tag -a v1.x.0 -m "Add new-skill-name"
+   git push origin main --tags
    ```
 
 ## Testing Skills
@@ -148,6 +166,18 @@ Example tests:
 - "create a Django model" → should use django-development
 - "plan this feature" → should use implementation-planning
 - "write tests for this" → should use testing
+
+## Integration with Devcontainer
+
+This repository is designed to be used as a git submodule in the [devcontainer](https://github.com/chunzhe-png/devcontainer) setup:
+
+```
+devcontainer/
+├── skills/              # This repo as submodule
+├── scripts/
+│   └── setup-claude.sh  # Symlinks skills to ~/.claude/skills/
+└── devcontainer.json    # Runs setup on container start
+```
 
 ## Troubleshooting
 
@@ -165,23 +195,36 @@ Example tests:
 
 3. Check description includes trigger keywords
 
-### Symlink Issues
+### Submodule Issues
 
-If symlinks don't work (e.g., Docker):
 ```bash
-# Copy instead of symlink
-cp -r /path/to/skills ~/.claude/skills
+# Update to committed version
+git submodule update --force
+
+# Re-initialize
+git submodule deinit -f skills
+git submodule update --init skills
 ```
 
 ## Contributing
 
-1. Make changes in a feature branch
-2. Test skill activation
-3. Update CHANGELOG.md
-4. Create PR with description of changes
-5. After merge, tag new version
+1. Fork this repository
+2. Create a feature branch
+3. Make changes and test skill activation
+4. Update CHANGELOG.md
+5. Create PR with description of changes
+6. After merge, maintainer will tag new version
+
+## Related Repositories
+
+- **Devcontainer**: https://github.com/chunzhe-png/devcontainer - Shared devcontainer setup that uses these skills
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
 *Version: 1.0.0*
 *Last Updated: 2025-12-16*
+*Repository: https://github.com/chunzhe-png/claude-skills*
